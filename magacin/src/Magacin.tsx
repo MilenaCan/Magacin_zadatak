@@ -38,37 +38,40 @@ export const Magacin = () => {
   const handleClose = () => {
     setOpen(false);
   };
-
+  const handleDelete = (index: number) => {
+    const newProducts = [...products];
+    newProducts.splice(index, 1);
+    setProducts(newProducts);
+    localStorage.setItem("products", JSON.stringify(newProducts));
+  };
   return (
     <DashboardPage>
-      <Box>
-        <TableContainer sx={{ width: "100%" }} component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell align="right">Nazi proizvoda</TableCell>
-                <TableCell align="right">Kolicina</TableCell>
-                <TableCell align="right">Cijena</TableCell>
-                <TableCell align="right">Tezina</TableCell>
-                <TableCell align="right">Serijski broj</TableCell>
-                <TableCell align="right">
-                  <Button onClick={handleOpen}>Dodaj Proizvod</Button>
-                </TableCell>
-                <TableCell></TableCell>
-              </TableRow>
-            </TableHead>
+      <TableContainer sx={{ width: "100%" }} component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell align="left">Nazi proizvoda</TableCell>
+              <TableCell align="left">Kolicina</TableCell>
+              <TableCell align="left">Cijena</TableCell>
+              <TableCell align="left">Tezina</TableCell>
+              <TableCell align="left">Serijski broj</TableCell>
+              <TableCell align="left">
+                <Button onClick={handleOpen}>Dodaj Proizvod</Button>
+              </TableCell>
+              <TableCell></TableCell>
+            </TableRow>
+          </TableHead>
 
-            <MagacinTabela products={products} />
-          </Table>
-        </TableContainer>
-        <AddProduct
-          open={open}
-          onClose={() => {
-            handleClose();
-            handleProductAdded();
-          }}
-        />
-      </Box>
+          <MagacinTabela products={products} onDelete={handleDelete} />
+        </Table>
+      </TableContainer>
+      <AddProduct
+        open={open}
+        onClose={() => {
+          handleClose();
+          handleProductAdded();
+        }}
+      />
     </DashboardPage>
   );
 };
