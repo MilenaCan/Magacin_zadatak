@@ -6,6 +6,8 @@ import {
   DialogTitle,
   TextField,
   Button,
+  TextareaAutosize,
+  Typography,
 } from "@mui/material";
 import { useState } from "react";
 interface AddProductDialogProps {
@@ -18,6 +20,7 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
   const [price, setPrice] = useState("");
   const [weight, setWeight] = useState("");
   const [serialNumber, setSerialNumber] = useState("");
+  const [description, setDescription] = useState("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -27,6 +30,7 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
       price,
       weight,
       serialNumber,
+      description,
     };
     console.log(product);
     const existingProducts = JSON.parse(
@@ -39,6 +43,7 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
     setPrice("");
     setWeight("");
     setSerialNumber("");
+    setDescription("");
     onClose();
   };
   const handleClose = () => {
@@ -48,6 +53,7 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
     setPrice("");
     setWeight("");
     setSerialNumber("");
+    setDescription("");
 
     onClose();
   };
@@ -127,6 +133,18 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
             variant="standard"
             value={serialNumber}
             onChange={(e) => setSerialNumber(e.target.value)}
+          />
+          <Typography pt={1} pb={1}>
+            Opis
+          </Typography>
+          <TextareaAutosize
+            autoFocus
+            required
+            style={{ width: "100%", resize: "none" }}
+            id="descriptioj"
+            name="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
         </DialogContent>
         <DialogActions>

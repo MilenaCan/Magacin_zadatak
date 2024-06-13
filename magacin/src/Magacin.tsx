@@ -19,6 +19,7 @@ interface Product {
   price: string;
   weight: string;
   serialNumber: string;
+  description: string;
 }
 export const Magacin = () => {
   const [open, setOpen] = useState(false);
@@ -58,6 +59,7 @@ export const Magacin = () => {
               <TableCell align="left">
                 <Button onClick={handleOpen}>Dodaj Proizvod</Button>
               </TableCell>
+              <TableCell></TableCell>
               <TableCell></TableCell>
             </TableRow>
           </TableHead>
