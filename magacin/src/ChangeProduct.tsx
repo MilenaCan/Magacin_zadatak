@@ -19,6 +19,7 @@ interface Product {
   weight: string;
   serialNumber: string;
   description: string;
+  imageUrl?: string;
 }
 interface ChangeProductDialogProps {
   open: boolean;

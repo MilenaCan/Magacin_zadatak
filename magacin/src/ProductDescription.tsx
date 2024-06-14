@@ -4,6 +4,8 @@ import {
   DialogContent,
   DialogTitle,
   Button,
+  Typography,
+  Box,
 } from "@mui/material";
 import React from "react";
 interface Product {
@@ -13,6 +15,7 @@ interface Product {
   weight: string;
   serialNumber: string;
   description: string;
+  imageUrl?: string;
 }
 interface ProductDescriptionProps {
   open: boolean;
@@ -28,7 +31,20 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Opis proizvoda</DialogTitle>
       <DialogContent>
-        <p>{product?.description}</p>
+        {product && (
+          <Box>
+            {product.imageUrl && (
+              <Box mb={2} textAlign="center">
+                <img
+                  src={product.imageUrl}
+                  alt={product.productName}
+                  style={{ maxWidth: "100%", height: "auto" }}
+                />
+              </Box>
+            )}
+          </Box>
+        )}
+        <Typography>{product?.description}</Typography>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Zatvori</Button>

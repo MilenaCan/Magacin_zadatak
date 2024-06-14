@@ -8,6 +8,7 @@ import {
   Button,
   TextareaAutosize,
   Typography,
+  Input,
 } from "@mui/material";
 import { useState } from "react";
 interface AddProductDialogProps {
@@ -21,10 +22,19 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
   const [weight, setWeight] = useState("");
   const [serialNumber, setSerialNumber] = useState("");
   const [description, setDescription] = useState("");
+  const [image, setImage] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const generateProductId = () => {
     return `product_${Date.now()}`;
   };
 
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setImage(file);
+      setImageUrl(URL.createObjectURL(file));
+    }
+  };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const product = {
@@ -35,6 +45,7 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
       weight,
       serialNumber,
       description,
+      imageUrl,
     };
     console.log(product);
     const existingProducts = JSON.parse(
@@ -48,6 +59,8 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
     setWeight("");
     setSerialNumber("");
     setDescription("");
+    setImage(null);
+    setImageUrl(null);
     onClose();
   };
   const handleClose = () => {
@@ -57,7 +70,8 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
     setWeight("");
     setSerialNumber("");
     setDescription("");
-
+    setImage(null);
+    setImageUrl(null);
     onClose();
   };
   return (
@@ -149,6 +163,20 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
+          <Typography pt={1} pb={1}>
+            Slika
+          </Typography>
+          <TextField
+            type="file"
+            inputProps={{ accept: "image/*" }}
+            onChange={handleImageChange}
+            fullWidth
+          />
+          {imageUrl && (
+            <Box mt={2}>
+              <img src={imageUrl} alt="Product" style={{ width: "100%" }} />
+            </Box>
+          )}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Otkazi</Button>

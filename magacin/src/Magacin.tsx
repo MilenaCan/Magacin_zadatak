@@ -20,6 +20,7 @@ interface Product {
   weight: string;
   serialNumber: string;
   description: string;
+  imageUrl?: string;
 }
 export const Magacin = () => {
   const [open, setOpen] = useState(false);
