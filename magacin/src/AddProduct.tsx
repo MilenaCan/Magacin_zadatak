@@ -21,10 +21,14 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
   const [weight, setWeight] = useState("");
   const [serialNumber, setSerialNumber] = useState("");
   const [description, setDescription] = useState("");
+  const generateProductId = () => {
+    return `product_${Date.now()}`;
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const product = {
+      id: generateProductId(),
       productName,
       quantity,
       price,
@@ -47,7 +51,6 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
     onClose();
   };
   const handleClose = () => {
-    // Reset fields
     setProductName("");
     setQuantity("");
     setPrice("");

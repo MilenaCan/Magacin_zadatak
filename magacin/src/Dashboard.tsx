@@ -21,13 +21,36 @@ const DashboardPage = ({ children }: DashboardParams) => {
   };
 
   return (
-    <Box>
-      <Box p={1} sx={{ border: "1px solid grey" }}>
-        <Typography color="textPrimary">Usename: {username} </Typography>
+    <Box
+      sx={{
+        height: "100vh",
+        bgcolor: "#ebeaea",
+        display: "flex",
+        flexDirection: "column",
+      }}
+      p={1}
+    >
+      <Box
+        p={1}
+        sx={{
+          borderRadius: 1,
+          bgcolor: "#ebeaea",
+          flex: "0 0 auto",
+        }}
+      >
+        <Typography color="textPrimary">Korisnik: {username} </Typography>
         <Typography color="textPrimary">Email: {email}</Typography>
-        <Button onClick={handleLogout}>Logout</Button>
+        <Button onClick={handleLogout}>Odjavi se</Button>
       </Box>
-      <Box>{children}</Box>
+      <Box
+        sx={{
+          flex: "1 1 auto",
+          overflowY: "auto",
+        }}
+        pt={1}
+      >
+        {children}
+      </Box>
     </Box>
   );
 };

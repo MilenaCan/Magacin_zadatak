@@ -3,7 +3,6 @@ import DashboardPage from "./Dashboard";
 import MagacinTabela from "./MagacinTabela";
 import AddProduct from "./AddProduct";
 import {
-  Box,
   TableContainer,
   Table,
   Paper,
@@ -14,6 +13,7 @@ import {
 } from "@mui/material";
 
 interface Product {
+  id: string;
   productName: string;
   quantity: string;
   price: string;
@@ -23,7 +23,7 @@ interface Product {
 }
 export const Magacin = () => {
   const [open, setOpen] = useState(false);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
   useEffect(() => {
     const storedProducts = JSON.parse(localStorage.getItem("products") || "[]");
     setProducts(storedProducts);
@@ -45,13 +45,16 @@ export const Magacin = () => {
     setProducts(newProducts);
     localStorage.setItem("products", JSON.stringify(newProducts));
   };
+  const handleProductsChange = (updatedProducts: Product[]) => {
+    setProducts(updatedProducts);
+  };
   return (
     <DashboardPage>
       <TableContainer sx={{ width: "100%" }} component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell align="left">Nazi proizvoda</TableCell>
+              <TableCell align="left">Naziv proizvoda</TableCell>
               <TableCell align="left">Kolicina</TableCell>
               <TableCell align="left">Cijena</TableCell>
               <TableCell align="left">Tezina</TableCell>
@@ -64,7 +67,11 @@ export const Magacin = () => {
             </TableRow>
           </TableHead>
 
-          <MagacinTabela products={products} onDelete={handleDelete} />
+          <MagacinTabela
+            products={products}
+            onDelete={handleDelete}
+            onProductsChange={handleProductsChange}
+          />
         </Table>
       </TableContainer>
       <AddProduct
