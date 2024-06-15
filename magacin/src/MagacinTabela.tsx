@@ -1,7 +1,11 @@
 import { TableRow, TableCell, TableBody, Button } from "@mui/material";
 import ProductDescription from "./ProductDescription";
 import ChangeProduct from "./ChangeProduct";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import ReadMoreIcon from "@mui/icons-material/ReadMore";
+
 interface Product {
   id: string;
   productName: string;
@@ -62,13 +66,32 @@ const MagacinTabela: React.FC<MagacinTabelaProps> = ({
             <TableCell align="left">{product.weight}</TableCell>
             <TableCell align="left">{product.serialNumber}</TableCell>
             <TableCell align="left">
-              <Button onClick={() => handleOpenModal(product)}>Izmjeni</Button>
+              <Button
+                onClick={() => handleOpenModal(product)}
+                variant="outlined"
+                startIcon={<EditIcon />}
+                sx={{ boxShadow: "1" }}
+              >
+                Izmjeni
+              </Button>
             </TableCell>
             <TableCell align="left">
-              <Button onClick={() => onDelete(index)}>Obrisi</Button>
+              <Button
+                onClick={() => onDelete(index)}
+                variant="outlined"
+                startIcon={<DeleteIcon />}
+                sx={{ boxShadow: "1" }}
+              >
+                Obriši
+              </Button>
             </TableCell>
             <TableCell align="left">
-              <Button onClick={() => handleOpenModalDetail(product)}>
+              <Button
+                onClick={() => handleOpenModalDetail(product)}
+                variant="outlined"
+                startIcon={<ReadMoreIcon />}
+                sx={{ boxShadow: "1" }}
+              >
                 Detalji
               </Button>
             </TableCell>

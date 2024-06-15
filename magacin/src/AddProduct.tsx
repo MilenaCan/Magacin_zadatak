@@ -1,3 +1,6 @@
+import CancelIcon from "@mui/icons-material/Cancel";
+import AddIcon from "@mui/icons-material/Add";
+
 import {
   Box,
   Dialog,
@@ -8,7 +11,6 @@ import {
   Button,
   TextareaAutosize,
   Typography,
-  Input,
 } from "@mui/material";
 import { useState } from "react";
 interface AddProductDialogProps {
@@ -31,9 +33,24 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setImage(file);
-      setImageUrl(URL.createObjectURL(file));
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        setImage(file);
+        setImageUrl(base64String);
+      };
+      reader.readAsDataURL(file);
     }
+  };
+  const resetState = () => {
+    setProductName("");
+    setQuantity("");
+    setPrice("");
+    setWeight("");
+    setSerialNumber("");
+    setDescription("");
+    setImage(null);
+    setImageUrl(null);
   };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -53,25 +70,11 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
     );
     existingProducts.push(product);
     localStorage.setItem("products", JSON.stringify(existingProducts));
-    setProductName("");
-    setQuantity("");
-    setPrice("");
-    setWeight("");
-    setSerialNumber("");
-    setDescription("");
-    setImage(null);
-    setImageUrl(null);
+    resetState();
     onClose();
   };
   const handleClose = () => {
-    setProductName("");
-    setQuantity("");
-    setPrice("");
-    setWeight("");
-    setSerialNumber("");
-    setDescription("");
-    setImage(null);
-    setImageUrl(null);
+    resetState();
     onClose();
   };
   return (
@@ -84,7 +87,11 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
           onSubmit: handleSubmit,
         }}
       >
-        <DialogTitle>Dodavanje proizvoda</DialogTitle>
+        <DialogTitle>
+          <Typography fontWeight={"fontWeightBold"}>
+            Dodavanje proizvoda
+          </Typography>
+        </DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
@@ -100,7 +107,6 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
             onChange={(e) => setProductName(e.target.value)}
           />
           <TextField
-            autoFocus
             required
             margin="dense"
             id="quantity"
@@ -113,7 +119,6 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
             onChange={(e) => setQuantity(e.target.value)}
           />
           <TextField
-            autoFocus
             required
             margin="dense"
             id="price"
@@ -126,7 +131,6 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
             onChange={(e) => setPrice(e.target.value)}
           />
           <TextField
-            autoFocus
             required
             margin="dense"
             id="weight"
@@ -139,7 +143,6 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
             onChange={(e) => setWeight(e.target.value)}
           />
           <TextField
-            autoFocus
             required
             margin="dense"
             id="serialNumber"
@@ -155,10 +158,9 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
             Opis
           </Typography>
           <TextareaAutosize
-            autoFocus
             required
             style={{ width: "100%", resize: "none" }}
-            id="descriptioj"
+            id="description"
             name="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -179,8 +181,16 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Otkazi</Button>
-          <Button type="submit">Dodaj</Button>
+          <Button
+            onClick={handleClose}
+            variant="outlined"
+            startIcon={<CancelIcon />}
+          >
+            Otkaži
+          </Button>
+          <Button type="submit" variant="outlined" startIcon={<AddIcon />}>
+            Dodaj
+          </Button>
         </DialogActions>
       </Dialog>
     </Box>

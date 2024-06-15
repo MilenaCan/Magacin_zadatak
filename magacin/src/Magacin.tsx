@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import DashboardPage from "./Dashboard";
 import MagacinTabela from "./MagacinTabela";
 import AddProduct from "./AddProduct";
+import AddIcon from "@mui/icons-material/Add";
+
 import {
   TableContainer,
   Table,
@@ -10,6 +12,7 @@ import {
   TableRow,
   TableCell,
   Button,
+  Typography,
 } from "@mui/material";
 
 interface Product {
@@ -51,17 +54,38 @@ export const Magacin = () => {
   };
   return (
     <DashboardPage>
-      <TableContainer sx={{ width: "100%" }} component={Paper}>
+      <TableContainer sx={{ boxShadow: "6", width: "100%" }} component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell align="left">Naziv proizvoda</TableCell>
-              <TableCell align="left">Kolicina</TableCell>
-              <TableCell align="left">Cijena</TableCell>
-              <TableCell align="left">Tezina</TableCell>
-              <TableCell align="left">Serijski broj</TableCell>
               <TableCell align="left">
-                <Button onClick={handleOpen}>Dodaj Proizvod</Button>
+                <Typography fontWeight={"fontWeightBold"}>
+                  Naziv proizvoda
+                </Typography>
+              </TableCell>
+              <TableCell align="left">
+                <Typography fontWeight={"fontWeightBold"}>Količina</Typography>
+              </TableCell>
+              <TableCell align="left">
+                <Typography fontWeight={"fontWeightBold"}>Cijena</Typography>
+              </TableCell>
+              <TableCell align="left">
+                <Typography fontWeight={"fontWeightBold"}> Težina</Typography>
+              </TableCell>
+              <TableCell align="left">
+                <Typography fontWeight={"fontWeightBold"}>
+                  Serijski broj
+                </Typography>
+              </TableCell>
+              <TableCell align="left">
+                <Button
+                  onClick={handleOpen}
+                  variant="outlined"
+                  startIcon={<AddIcon />}
+                  sx={{ boxShadow: "1" }}
+                >
+                  Dodaj Proizvod
+                </Button>
               </TableCell>
               <TableCell></TableCell>
               <TableCell></TableCell>

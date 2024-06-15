@@ -1,3 +1,4 @@
+import CloseIcon from "@mui/icons-material/Close";
 import {
   Dialog,
   DialogActions,
@@ -29,11 +30,16 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({
 }) => {
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Opis proizvoda</DialogTitle>
+      <DialogTitle>
+        <Typography fontWeight={"fontWeightBold"} align="center">
+          Detaljnije informacije
+        </Typography>
+      </DialogTitle>
       <DialogContent>
         {product && (
           <Box>
-            {product.imageUrl && (
+            <Typography fontWeight={"fontWeightMedium"}>Slika: </Typography>
+            {product?.imageUrl && (
               <Box mb={2} textAlign="center">
                 <img
                   src={product.imageUrl}
@@ -44,10 +50,13 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({
             )}
           </Box>
         )}
-        <Typography>{product?.description}</Typography>
+        <Typography fontWeight={"fontWeightMedium"}>Opis: </Typography>
+        <Typography pt={1}>{product?.description}</Typography>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Zatvori</Button>
+        <Button onClick={onClose} variant="outlined" startIcon={<CloseIcon />}>
+          Zatvori
+        </Button>
       </DialogActions>
     </Dialog>
   );

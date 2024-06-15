@@ -1,4 +1,6 @@
 import React from "react";
+import CancelIcon from "@mui/icons-material/Cancel";
+import CheckIcon from "@mui/icons-material/Check";
 import {
   Box,
   Dialog,
@@ -101,7 +103,11 @@ const ChangeProduct: React.FC<ChangeProductDialogProps> = ({
           onSubmit: handleSubmit,
         }}
       >
-        <DialogTitle>Izmjena proizvoda</DialogTitle>
+        <DialogTitle>
+          <Typography fontWeight={"fontWeightBold"}>
+            Izmjena proizvoda
+          </Typography>
+        </DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
@@ -182,8 +188,16 @@ const ChangeProduct: React.FC<ChangeProductDialogProps> = ({
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Otkazi</Button>
-          <Button type="submit">Sacuvaj</Button>
+          <Button
+            onClick={handleClose}
+            variant="outlined"
+            startIcon={<CancelIcon />}
+          >
+            Otkaži
+          </Button>
+          <Button type="submit" variant="outlined" startIcon={<CheckIcon />}>
+            Sačuvaj
+          </Button>
         </DialogActions>
       </Dialog>
     </Box>

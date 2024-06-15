@@ -2,6 +2,9 @@ import React, { useContext } from "react";
 import { UserContext } from "./UserContext";
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { shadows } from "@mui/system";
+
 interface DashboardParams {
   children: any;
 }
@@ -24,30 +27,42 @@ const DashboardPage = ({ children }: DashboardParams) => {
     <Box
       sx={{
         height: "100vh",
-        bgcolor: "#ebeaea",
+        bgcolor: "#dda4d2",
         display: "flex",
         flexDirection: "column",
       }}
-      p={1}
     >
       <Box
-        p={1}
         sx={{
           borderRadius: 1,
-          bgcolor: "#ebeaea",
+          bgcolor: "#e8c7e3",
           flex: "0 0 auto",
         }}
+        display="flex"
+        p={1}
+        gap={117}
       >
-        <Typography color="textPrimary">Korisnik: {username} </Typography>
-        <Typography color="textPrimary">Email: {email}</Typography>
-        <Button onClick={handleLogout}>Odjavi se</Button>
+        <Box>
+          <Typography color="textPrimary">Korisnik: {username} </Typography>
+          <Typography color="textPrimary">Email: {email}</Typography>
+        </Box>
+
+        <Button
+          sx={{ boxShadow: "1" }}
+          onClick={handleLogout}
+          variant="outlined"
+          startIcon={<LogoutIcon />}
+        >
+          Odjavi se
+        </Button>
       </Box>
       <Box
         sx={{
           flex: "1 1 auto",
           overflowY: "auto",
         }}
-        pt={1}
+        alignSelf="center"
+        pt={3}
       >
         {children}
       </Box>
