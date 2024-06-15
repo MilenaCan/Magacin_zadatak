@@ -1,17 +1,16 @@
-import { useContext, useState } from "react";
+import React, { useState, useContext } from "react";
 import { UserContext } from "./UserContext";
-import React from "react";
 import {
   Box,
-  Button,
-  Container,
   TextField,
+  Button,
   Typography,
+  Container,
   CssBaseline,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,14 +21,22 @@ const LoginForm = () => {
   if (!authContext) {
     return null;
   }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    authContext.login(username, email, password);
-    if (authContext.isLoggedIn) {
-      navigate("/magacin");
-    } else {
-      setError("Neispravno korisničko ime!");
+    const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
+    const userExists = existingUsers.some(
+      (user: any) => user.username === username
+    );
+
+    if (userExists) {
+      setError("Korisničko ime je već zauzeto!");
+      return;
     }
+
+    authContext.register(username, email, password);
+    alert("Registracija uspješna!");
+    navigate("/login");
   };
 
   return (
@@ -44,7 +51,7 @@ const LoginForm = () => {
         }}
       >
         <Typography component="h1" variant="h5">
-          Prijava
+          Registracija
         </Typography>
         {error && <Typography color="error">{error}</Typography>}
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
@@ -53,7 +60,7 @@ const LoginForm = () => {
             required
             fullWidth
             id="username"
-            label="Username"
+            label="Korisničko ime"
             name="username"
             autoComplete="username"
             autoFocus
@@ -65,7 +72,7 @@ const LoginForm = () => {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Email"
             name="email"
             autoComplete="email"
             value={email}
@@ -76,7 +83,7 @@ const LoginForm = () => {
             required
             fullWidth
             name="password"
-            label="Password"
+            label="Lozinka"
             type="password"
             id="password"
             autoComplete="current-password"
@@ -87,9 +94,9 @@ const LoginForm = () => {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ boxShadow: 1, mt: 3, mb: 2 }}
+            sx={{ mt: 3, mb: 2 }}
           >
-            Prijava
+            Registracija
           </Button>
         </Box>
       </Box>
@@ -97,4 +104,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

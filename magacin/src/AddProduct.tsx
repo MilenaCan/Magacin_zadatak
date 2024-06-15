@@ -1,6 +1,7 @@
 import CancelIcon from "@mui/icons-material/Cancel";
 import AddIcon from "@mui/icons-material/Add";
 
+import { useState } from "react";
 import {
   Box,
   Dialog,
@@ -12,7 +13,7 @@ import {
   TextareaAutosize,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+
 interface AddProductDialogProps {
   open: boolean;
   onClose: () => void;
@@ -26,6 +27,7 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+
   const generateProductId = () => {
     return `product_${Date.now()}`;
   };
@@ -185,10 +187,16 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
             onClick={handleClose}
             variant="outlined"
             startIcon={<CancelIcon />}
+            sx={{ boxShadow: "1" }}
           >
             Otkaži
           </Button>
-          <Button type="submit" variant="outlined" startIcon={<AddIcon />}>
+          <Button
+            sx={{ boxShadow: "1" }}
+            type="submit"
+            variant="outlined"
+            startIcon={<AddIcon />}
+          >
             Dodaj
           </Button>
         </DialogActions>

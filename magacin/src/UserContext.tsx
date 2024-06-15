@@ -1,6 +1,7 @@
 import React, { createContext, useState, ReactNode, useEffect } from "react";
 
 interface UserContextType {
+  register: (username: string, email: string, password: string) => void;
   login: (username: string, email: string, password: string) => void;
   logout: () => void;
   isLoggedIn: boolean;
@@ -21,18 +22,27 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [username, setUsername] = useState<string | null>(null);
   const [email, setEmail] = useState<string | null>(null);
 
+  const register = (username: string, email: string, password: string) => {
+    const storedUsers = localStorage.getItem("users");
+    const users = storedUsers ? JSON.parse(storedUsers) : [];
+    const newUser = { username, email, password };
+    localStorage.setItem("users", JSON.stringify([...users, newUser]));
+  };
+
   const login = (username: string, email: string, password: string) => {
-    if (username && email && password) {
+    const storedUsers = localStorage.getItem("users");
+    const users = storedUsers ? JSON.parse(storedUsers) : [];
+    const user = users.find(
+      (user: any) =>
+        user.username === username &&
+        user.email === email &&
+        user.password === password
+    );
+    if (user) {
       setIsLoggedIn(true);
       setUsername(username);
       setEmail(email);
-
-      const storedUsers = localStorage.getItem("users");
-      const users = storedUsers ? JSON.parse(storedUsers) : [];
-      const newUser = { username, email };
-      localStorage.setItem("users", JSON.stringify([...users, newUser]));
-
-      localStorage.setItem("currentUser", JSON.stringify(newUser));
+      localStorage.setItem("currentUser", JSON.stringify(user));
     }
   };
   const logout = () => {
@@ -40,7 +50,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     setUsername(null);
     setEmail(null);
     localStorage.removeItem("currentUser");
-    //localStorage.removeItem("users");
+    localStorage.removeItem("users");
   };
   useEffect(() => {
     const storedUser = localStorage.getItem("currentUser");
@@ -53,7 +63,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   }, []);
   return (
     <UserContext.Provider
-      value={{ login, logout, isLoggedIn, username, email }}
+      value={{ login, logout, isLoggedIn, username, email, register }}
     >
       {children}
     </UserContext.Provider>

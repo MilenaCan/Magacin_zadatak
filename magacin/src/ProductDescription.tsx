@@ -54,7 +54,12 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({
         <Typography pt={1}>{product?.description}</Typography>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} variant="outlined" startIcon={<CloseIcon />}>
+        <Button
+          onClick={onClose}
+          variant="outlined"
+          startIcon={<CloseIcon />}
+          sx={{ boxShadow: "1" }}
+        >
           Zatvori
         </Button>
       </DialogActions>

@@ -192,10 +192,16 @@ const ChangeProduct: React.FC<ChangeProductDialogProps> = ({
             onClick={handleClose}
             variant="outlined"
             startIcon={<CancelIcon />}
+            sx={{ boxShadow: "1" }}
           >
             Otkaži
           </Button>
-          <Button type="submit" variant="outlined" startIcon={<CheckIcon />}>
+          <Button
+            type="submit"
+            variant="outlined"
+            startIcon={<CheckIcon />}
+            sx={{ boxShadow: "1" }}
+          >
             Sačuvaj
           </Button>
         </DialogActions>
