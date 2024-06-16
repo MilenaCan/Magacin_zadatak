@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { UserContext } from "./UserContext";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { shadows } from "@mui/system";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 
 interface DashboardParams {
   children: any;
@@ -16,11 +16,14 @@ const DashboardPage = ({ children }: DashboardParams) => {
   if (!authContext || !authContext.username || !authContext.email) {
     return null;
   }
-  const { username, email } = authContext;
 
   const handleLogout = () => {
     authContext.logout();
     navigate("/");
+  };
+
+  const handleProfile = () => {
+    navigate("/profile");
   };
 
   return (
@@ -35,20 +38,26 @@ const DashboardPage = ({ children }: DashboardParams) => {
       <Box
         sx={{
           borderRadius: 1,
-          bgcolor: "#e8c7e3",
+          bgcolor: "#dda4d2",
           flex: "0 0 auto",
         }}
         display="flex"
         p={1}
-        gap={117}
+        gap={137}
       >
         <Box>
-          <Typography color="textPrimary">Korisnik: {username} </Typography>
-          <Typography color="textPrimary">Email: {email}</Typography>
+          <Button
+            sx={{ bgcolor: "#e4bfdb", boxShadow: "1" }}
+            variant="outlined"
+            onClick={handleProfile}
+            startIcon={<AccountBoxIcon />}
+          >
+            Profil
+          </Button>
         </Box>
 
         <Button
-          sx={{ boxShadow: "1" }}
+          sx={{ bgcolor: "#e4bfdb", boxShadow: "1" }}
           onClick={handleLogout}
           variant="outlined"
           startIcon={<LogoutIcon />}

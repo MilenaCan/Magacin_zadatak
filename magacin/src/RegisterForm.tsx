@@ -38,7 +38,9 @@ const RegisterForm = () => {
     alert("Registracija uspješna!");
     navigate("/login");
   };
-
+  const handleClik = () => {
+    navigate("/login");
+  };
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -53,6 +55,16 @@ const RegisterForm = () => {
         <Typography component="h1" variant="h5">
           Registracija
         </Typography>
+        <Box pt={1}>
+          <Typography>Imate nalog?</Typography>
+          <Button
+            fullWidth
+            sx={{ boxShadow: 1, mt: 3, mb: 2 }}
+            onClick={handleClik}
+          >
+            Prijava
+          </Button>
+        </Box>
         {error && <Typography color="error">{error}</Typography>}
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <TextField

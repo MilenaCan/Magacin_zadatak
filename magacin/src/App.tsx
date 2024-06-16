@@ -5,6 +5,8 @@ import LoginForm from "./LoginForm";
 
 import { Magacin } from "./Magacin";
 import RegisterForm from "./RegisterForm";
+import ProfilPage from "./ProfilPage";
+
 function App() {
   return (
     <UserProvider>
@@ -13,6 +15,7 @@ function App() {
           <Route path="/" element={<RegisterForm />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/magacin" element={<Magacin />} />
+          <Route path="/profile" element={<ProfilPage />} />
         </Routes>
       </Router>
     </UserProvider>

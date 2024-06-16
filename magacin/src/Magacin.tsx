@@ -25,6 +25,7 @@ interface Product {
   description: string;
   imageUrl?: string;
 }
+
 export const Magacin = () => {
   const [open, setOpen] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);

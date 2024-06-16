@@ -32,12 +32,14 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const login = (username: string, email: string, password: string) => {
     const storedUsers = localStorage.getItem("users");
     const users = storedUsers ? JSON.parse(storedUsers) : [];
+    console.log("KORISNIK " + storedUsers);
     const user = users.find(
       (user: any) =>
         user.username === username &&
         user.email === email &&
         user.password === password
     );
+
     if (user) {
       setIsLoggedIn(true);
       setUsername(username);
@@ -45,12 +47,14 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
       localStorage.setItem("currentUser", JSON.stringify(user));
     }
   };
+
   const logout = () => {
     setIsLoggedIn(false);
+
     setUsername(null);
     setEmail(null);
     localStorage.removeItem("currentUser");
-    localStorage.removeItem("users");
+    //localStorage.removeItem("users");
   };
   useEffect(() => {
     const storedUser = localStorage.getItem("currentUser");
