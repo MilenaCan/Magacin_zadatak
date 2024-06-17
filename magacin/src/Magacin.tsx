@@ -3,6 +3,7 @@ import DashboardPage from "./Dashboard";
 import MagacinTabela from "./MagacinTabela";
 import AddProduct from "./AddProduct";
 import AddIcon from "@mui/icons-material/Add";
+import TextField from "@mui/material/TextField";
 
 import {
   TableContainer,
@@ -29,6 +30,7 @@ interface Product {
 export const Magacin = () => {
   const [open, setOpen] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
+  const [search, setSearch] = useState("");
   useEffect(() => {
     const storedProducts = JSON.parse(localStorage.getItem("products") || "[]");
     setProducts(storedProducts);
@@ -53,8 +55,22 @@ export const Magacin = () => {
   const handleProductsChange = (updatedProducts: Product[]) => {
     setProducts(updatedProducts);
   };
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
+  };
+
+  const filteredProducts = products.filter((product) =>
+    product.productName.toLowerCase().includes(search.toLowerCase())
+  );
   return (
     <DashboardPage>
+      <TextField
+        label="Pretraži proizvode"
+        variant="outlined"
+        value={search}
+        onChange={handleSearchChange}
+        sx={{ marginBottom: 2, width: "100%" }}
+      />
       <TableContainer sx={{ boxShadow: "6", width: "100%" }} component={Paper}>
         <Table>
           <TableHead>
@@ -94,7 +110,7 @@ export const Magacin = () => {
           </TableHead>
 
           <MagacinTabela
-            products={products}
+            products={filteredProducts}
             onDelete={handleDelete}
             onProductsChange={handleProductsChange}
           />

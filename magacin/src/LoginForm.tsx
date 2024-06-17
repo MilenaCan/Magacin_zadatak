@@ -28,7 +28,7 @@ const LoginForm = () => {
     if (authContext.isLoggedIn) {
       navigate("/magacin");
     } else {
-      setError("Neispravno korisničko ime!");
+      setError("Neispravno uneseni podaci!");
     }
   };
   return (
@@ -52,7 +52,7 @@ const LoginForm = () => {
             required
             fullWidth
             id="username"
-            label="Username"
+            label="Korisnicko ime"
             name="username"
             autoComplete="username"
             autoFocus
@@ -75,7 +75,7 @@ const LoginForm = () => {
             required
             fullWidth
             name="password"
-            label="Password"
+            label="Lozinka"
             type="password"
             id="password"
             autoComplete="current-password"
