@@ -1,5 +1,9 @@
 import React, { createContext, useState, ReactNode, useEffect } from "react";
-
+interface User {
+  username: string;
+  email: string;
+  password: string;
+}
 interface UserContextType {
   register: (username: string, email: string, password: string) => void;
   login: (username: string, email: string, password: string) => void;
@@ -24,14 +28,16 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
   const register = (username: string, email: string, password: string) => {
     const storedUsers = localStorage.getItem("users");
-    const users = storedUsers ? JSON.parse(storedUsers) : [];
+    const users: User[] = storedUsers ? JSON.parse(storedUsers) : [];
     const newUser = { username, email, password };
     localStorage.setItem("users", JSON.stringify([...users, newUser]));
+    console.log("Registrovani:", JSON.stringify([...users, newUser]));
+    console.log("REGISTROVAO SE: " + storedUsers);
   };
 
   const login = (username: string, email: string, password: string) => {
     const storedUsers = localStorage.getItem("users");
-    const users = storedUsers ? JSON.parse(storedUsers) : [];
+    const users: User[] = storedUsers ? JSON.parse(storedUsers) : [];
     console.log("KORISNIK " + storedUsers);
     const user = users.find(
       (user: any) =>
@@ -41,10 +47,13 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     );
 
     if (user) {
+      console.log("Korisnik pronadjen:", user);
       setIsLoggedIn(true);
       setUsername(username);
       setEmail(email);
       localStorage.setItem("currentUser", JSON.stringify(user));
+    } else {
+      console.error("Neispravni podaci za prijavu");
     }
   };
 
@@ -65,6 +74,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
       setEmail(email);
     }
   }, []);
+
   return (
     <UserContext.Provider
       value={{ login, logout, isLoggedIn, username, email, register }}

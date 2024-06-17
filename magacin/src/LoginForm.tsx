@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UserContext } from "./UserContext";
 import React from "react";
 import {
@@ -19,15 +19,20 @@ const LoginForm = () => {
   const authContext = useContext(UserContext);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (authContext && authContext.isLoggedIn) {
+      navigate("/magacin");
+    }
+  }, [authContext, authContext?.isLoggedIn, navigate]);
+
   if (!authContext) {
     return null;
   }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     authContext.login(username, email, password);
-    if (authContext.isLoggedIn) {
-      navigate("/magacin");
-    } else {
+    if (!authContext.isLoggedIn) {
       setError("Neispravno uneseni podaci!");
     }
   };
