@@ -1,17 +1,16 @@
-import { useContext, useState, useEffect } from "react";
-import { UserContext } from "./UserContext";
-import React from "react";
+import React, { useState, useContext } from "react";
+import { UserContext } from "../context/UserContext";
 import {
   Box,
-  Button,
-  Container,
   TextField,
+  Button,
   Typography,
+  Container,
   CssBaseline,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,22 +18,28 @@ const LoginForm = () => {
   const authContext = useContext(UserContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (authContext && authContext.isLoggedIn) {
-      navigate("/magacin");
-    }
-  }, [authContext, authContext?.isLoggedIn, navigate]);
-
   if (!authContext) {
     return null;
   }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    authContext.login(username, email, password);
-    if (!authContext.isLoggedIn) {
-      setError("Neispravno uneseni podaci!");
+    const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
+    const userExists = existingUsers.some(
+      (user: any) => user.username === username
+    );
+
+    if (userExists) {
+      setError("Korisničko ime je već zauzeto!");
+      return;
     }
+
+    authContext.register(username, email, password);
+    alert("Registracija uspješna!");
+    navigate("/login");
+  };
+  const handleClik = () => {
+    navigate("/login");
   };
   return (
     <Container component="main" maxWidth="xs">
@@ -48,8 +53,18 @@ const LoginForm = () => {
         }}
       >
         <Typography component="h1" variant="h5">
-          Prijava
+          Registracija
         </Typography>
+        <Box pt={1}>
+          <Typography>Imate nalog?</Typography>
+          <Button
+            fullWidth
+            sx={{ boxShadow: 1, mt: 3, mb: 2 }}
+            onClick={handleClik}
+          >
+            Prijava
+          </Button>
+        </Box>
         {error && <Typography color="error">{error}</Typography>}
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <TextField
@@ -57,7 +72,7 @@ const LoginForm = () => {
             required
             fullWidth
             id="username"
-            label="Korisnicko ime"
+            label="Korisničko ime"
             name="username"
             autoComplete="username"
             autoFocus
@@ -69,7 +84,7 @@ const LoginForm = () => {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Email"
             name="email"
             autoComplete="email"
             value={email}
@@ -91,9 +106,9 @@ const LoginForm = () => {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ boxShadow: 1, mt: 3, mb: 2 }}
+            sx={{ mt: 3, mb: 2 }}
           >
-            Prijava
+            Registracija
           </Button>
         </Box>
       </Box>
@@ -101,4 +116,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

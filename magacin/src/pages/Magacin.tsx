@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import DashboardPage from "./Dashboard";
-import MagacinTabela from "./MagacinTabela";
-import AddProduct from "./AddProduct";
+import DashboardPage from "../components/Dashboard";
+import MagacinTabela from "../components/MagacinTabela";
+import AddProduct from "../components/AddProduct";
 import AddIcon from "@mui/icons-material/Add";
 import TextField from "@mui/material/TextField";
 

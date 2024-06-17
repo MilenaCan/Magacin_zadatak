@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { UserContext } from "./UserContext";
+import { UserContext } from "../context/UserContext";
 import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";

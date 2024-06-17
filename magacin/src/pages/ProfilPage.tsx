@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { UserContext } from "./UserContext";
+import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { Box, Typography, Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";

@@ -1,11 +1,11 @@
 import React from "react";
-import { UserProvider } from "./UserContext";
+import { UserProvider } from "./context/UserContext";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LoginForm from "./LoginForm";
+import LoginForm from "./pages/LoginForm";
 
-import { Magacin } from "./Magacin";
-import RegisterForm from "./RegisterForm";
-import ProfilPage from "./ProfilPage";
+import { Magacin } from "./pages/Magacin";
+import RegisterForm from "./pages/RegisterForm";
+import ProfilPage from "./pages/ProfilPage";
 
 function App() {
   return (
