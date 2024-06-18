@@ -40,24 +40,28 @@ const DashboardPage = ({ children }: DashboardParams) => {
           borderRadius: 1,
           bgcolor: "#dda4d2",
           flex: "0 0 auto",
+          p: { xs: 1, sm: 2 }, // Adjust padding for different screen sizes
         }}
         display="flex"
-        p={1}
-        gap={137}
+        gap={2} // Adjust gap for better spacing
       >
-        <Box>
-          <Button
-            sx={{ bgcolor: "#e4bfdb", boxShadow: "1" }}
-            variant="outlined"
-            onClick={handleProfile}
-            startIcon={<AccountBoxIcon />}
-          >
-            Profil
-          </Button>
-        </Box>
+        <Button
+          sx={{
+            bgcolor: "#e4bfdb",
+            boxShadow: "1",
+          }}
+          variant="outlined"
+          onClick={handleProfile}
+          startIcon={<AccountBoxIcon />}
+        >
+          Profil
+        </Button>
 
         <Button
-          sx={{ bgcolor: "#e4bfdb", boxShadow: "1" }}
+          sx={{
+            bgcolor: "#e4bfdb",
+            boxShadow: "1",
+          }}
           onClick={handleLogout}
           variant="outlined"
           startIcon={<LogoutIcon />}
@@ -69,9 +73,11 @@ const DashboardPage = ({ children }: DashboardParams) => {
         sx={{
           flex: "1 1 auto",
           overflowY: "auto",
+          alignSelf: "center",
+          pt: 3,
+          width: "100%",
+          maxWidth: "1200px",
         }}
-        alignSelf="center"
-        pt={3}
       >
         {children}
       </Box>

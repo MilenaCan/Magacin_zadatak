@@ -14,6 +14,8 @@ import {
   TableCell,
   Button,
   Typography,
+  Grid,
+  Container,
 } from "@mui/material";
 
 interface Product {
@@ -64,65 +66,78 @@ export const Magacin = () => {
   );
   return (
     <DashboardPage>
-      <TextField
-        label="Pretraži proizvode"
-        variant="outlined"
-        value={search}
-        onChange={handleSearchChange}
-        sx={{ marginBottom: 2, width: "100%" }}
-      />
-      <TableContainer sx={{ boxShadow: "6", width: "100%" }} component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell align="left">
-                <Typography fontWeight={"fontWeightBold"}>
-                  Naziv proizvoda
-                </Typography>
-              </TableCell>
-              <TableCell align="left">
-                <Typography fontWeight={"fontWeightBold"}>Količina</Typography>
-              </TableCell>
-              <TableCell align="left">
-                <Typography fontWeight={"fontWeightBold"}>Cijena</Typography>
-              </TableCell>
-              <TableCell align="left">
-                <Typography fontWeight={"fontWeightBold"}> Težina</Typography>
-              </TableCell>
-              <TableCell align="left">
-                <Typography fontWeight={"fontWeightBold"}>
-                  Serijski broj
-                </Typography>
-              </TableCell>
-              <TableCell align="left">
-                <Button
-                  onClick={handleOpen}
-                  variant="outlined"
-                  startIcon={<AddIcon />}
-                  sx={{ boxShadow: "1" }}
-                >
-                  Dodaj Proizvod
-                </Button>
-              </TableCell>
-              <TableCell></TableCell>
-              <TableCell></TableCell>
-            </TableRow>
-          </TableHead>
+      <Container>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <TextField
+              label="Pretraži proizvode"
+              variant="outlined"
+              value={search}
+              onChange={handleSearchChange}
+              fullWidth
+              sx={{ marginBottom: 2 }}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TableContainer sx={{ boxShadow: "6" }} component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="left">
+                      <Typography fontWeight={"fontWeightBold"}>
+                        Naziv proizvoda
+                      </Typography>
+                    </TableCell>
+                    <TableCell align="left">
+                      <Typography fontWeight={"fontWeightBold"}>
+                        Količina
+                      </Typography>
+                    </TableCell>
+                    <TableCell align="left">
+                      <Typography fontWeight={"fontWeightBold"}>
+                        Cijena
+                      </Typography>
+                    </TableCell>
+                    <TableCell align="left">
+                      <Typography fontWeight={"fontWeightBold"}>
+                        Težina
+                      </Typography>
+                    </TableCell>
+                    <TableCell align="left">
+                      <Typography fontWeight={"fontWeightBold"}>
+                        Serijski broj
+                      </Typography>
+                    </TableCell>
+                    <TableCell align="left">
+                      <Button
+                        onClick={handleOpen}
+                        variant="outlined"
+                        startIcon={<AddIcon />}
+                        sx={{ boxShadow: "1" }}
+                      >
+                        Dodaj Proizvod
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
 
-          <MagacinTabela
-            products={filteredProducts}
-            onDelete={handleDelete}
-            onProductsChange={handleProductsChange}
-          />
-        </Table>
-      </TableContainer>
-      <AddProduct
-        open={open}
-        onClose={() => {
-          handleClose();
-          handleProductAdded();
-        }}
-      />
+                <MagacinTabela
+                  products={filteredProducts}
+                  onDelete={handleDelete}
+                  onProductsChange={handleProductsChange}
+                />
+              </Table>
+            </TableContainer>
+          </Grid>
+        </Grid>
+        <AddProduct
+          open={open}
+          onClose={() => {
+            handleClose();
+            handleProductAdded();
+          }}
+        />
+      </Container>
     </DashboardPage>
   );
 };

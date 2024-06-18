@@ -1,4 +1,12 @@
-import { TableRow, TableCell, TableBody, Button } from "@mui/material";
+import {
+  TableRow,
+  TableCell,
+  TableBody,
+  Button,
+  Box,
+  Paper,
+  Container,
+} from "@mui/material";
 import ProductDescription from "./ProductDescription";
 import ChangeProduct from "./ChangeProduct";
 import { useState } from "react";
@@ -57,7 +65,7 @@ const MagacinTabela: React.FC<MagacinTabelaProps> = ({
 
   return (
     <>
-      <TableBody>
+      <TableBody component={Paper}>
         {products.map((product, index) => (
           <TableRow key={index}>
             <TableCell align="left">{product.productName}</TableCell>
@@ -66,34 +74,32 @@ const MagacinTabela: React.FC<MagacinTabelaProps> = ({
             <TableCell align="left">{product.weight}</TableCell>
             <TableCell align="left">{product.serialNumber}</TableCell>
             <TableCell align="left">
-              <Button
-                onClick={() => handleOpenModal(product)}
-                variant="outlined"
-                startIcon={<EditIcon />}
-                sx={{ boxShadow: "1" }}
-              >
-                Izmjeni
-              </Button>
-            </TableCell>
-            <TableCell align="left">
-              <Button
-                onClick={() => onDelete(index)}
-                variant="outlined"
-                startIcon={<DeleteIcon />}
-                sx={{ boxShadow: "1" }}
-              >
-                Obriši
-              </Button>
-            </TableCell>
-            <TableCell align="left">
-              <Button
-                onClick={() => handleOpenModalDetail(product)}
-                variant="outlined"
-                startIcon={<ReadMoreIcon />}
-                sx={{ boxShadow: "1" }}
-              >
-                Detalji
-              </Button>
+              <Box sx={{ display: "flex", gap: 1 }}>
+                <Button
+                  onClick={() => handleOpenModal(product)}
+                  variant="outlined"
+                  startIcon={<EditIcon />}
+                  sx={{ boxShadow: "1" }}
+                >
+                  Izmjeni
+                </Button>
+                <Button
+                  onClick={() => onDelete(index)}
+                  variant="outlined"
+                  startIcon={<DeleteIcon />}
+                  sx={{ boxShadow: "1" }}
+                >
+                  Obriši
+                </Button>
+                <Button
+                  onClick={() => handleOpenModalDetail(product)}
+                  variant="outlined"
+                  startIcon={<ReadMoreIcon />}
+                  sx={{ boxShadow: "1" }}
+                >
+                  Detalji
+                </Button>
+              </Box>
             </TableCell>
           </TableRow>
         ))}

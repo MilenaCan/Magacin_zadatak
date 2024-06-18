@@ -8,6 +8,7 @@ import {
   TextField,
   Typography,
   CssBaseline,
+  useMediaQuery,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
@@ -18,7 +19,7 @@ const LoginForm = () => {
   const [error, setError] = useState("");
   const authContext = useContext(UserContext);
   const navigate = useNavigate();
-
+  const isSmallScreen = useMediaQuery("(max-width:600px)");
   useEffect(() => {
     if (authContext && authContext.isLoggedIn) {
       navigate("/magacin");
@@ -45,6 +46,7 @@ const LoginForm = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          padding: isSmallScreen ? 2 : 3,
         }}
       >
         <Typography component="h1" variant="h5">
