@@ -25,12 +25,12 @@ interface Product {
   imageUrl?: string;
 }
 
-interface MagacinTabelaProps {
+interface StoragePageTableProps {
   products: Product[];
   onDelete: (index: number) => void;
   onProductsChange: (products: Product[]) => void;
 }
-const MagacinTabela: React.FC<MagacinTabelaProps> = ({
+const StoragePageTable: React.FC<StoragePageTableProps> = ({
   products,
   onDelete,
   onProductsChange,
@@ -122,4 +122,4 @@ const MagacinTabela: React.FC<MagacinTabelaProps> = ({
   );
 };
 
-export default MagacinTabela;
+export default StoragePageTable;

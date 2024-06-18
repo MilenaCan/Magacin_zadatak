@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DashboardPage from "../components/Dashboard";
-import MagacinTabela from "../components/MagacinTabela";
+import StoragePageTable from "../components/StoragePageTable";
 import AddProduct from "../components/AddProduct";
 import AddIcon from "@mui/icons-material/Add";
 import TextField from "@mui/material/TextField";
@@ -29,7 +29,7 @@ interface Product {
   imageUrl?: string;
 }
 
-export const Magacin = () => {
+export const StoragePage = () => {
   const [open, setOpen] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
   const [search, setSearch] = useState("");
@@ -121,7 +121,7 @@ export const Magacin = () => {
                   </TableRow>
                 </TableHead>
 
-                <MagacinTabela
+                <StoragePageTable
                   products={filteredProducts}
                   onDelete={handleDelete}
                   onProductsChange={handleProductsChange}
