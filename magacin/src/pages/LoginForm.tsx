@@ -32,7 +32,7 @@ const LoginForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    authContext.login(username, email, password);
+    authContext.login(username, password);
     if (!authContext.isLoggedIn) {
       setError("Neispravno uneseni podaci!");
     }
@@ -66,17 +66,7 @@ const LoginForm = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+
           <TextField
             margin="normal"
             required

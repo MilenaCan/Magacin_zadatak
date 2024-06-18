@@ -178,6 +178,7 @@ const ChangeProduct: React.FC<ChangeProductDialogProps> = ({
             Opis
           </Typography>
           <TextareaAutosize
+            minRows={3}
             autoFocus
             required
             style={{ width: "100%", resize: "none" }}

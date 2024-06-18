@@ -5,7 +5,6 @@ import {
   Button,
   Box,
   Paper,
-  Container,
 } from "@mui/material";
 import ProductDescription from "./ProductDescription";
 import ChangeProduct from "./ChangeProduct";

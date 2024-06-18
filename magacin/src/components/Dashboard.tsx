@@ -13,7 +13,13 @@ const DashboardPage = ({ children }: DashboardParams) => {
   const authContext = useContext(UserContext);
 
   const navigate = useNavigate();
-  if (!authContext || !authContext.username || !authContext.email) {
+  if (
+    !authContext ||
+    !authContext.username ||
+    !authContext.email ||
+    !authContext.name ||
+    !authContext.surname
+  ) {
     return null;
   }
 
@@ -40,10 +46,10 @@ const DashboardPage = ({ children }: DashboardParams) => {
           borderRadius: 1,
           bgcolor: "#dda4d2",
           flex: "0 0 auto",
-          p: { xs: 1, sm: 2 }, // Adjust padding for different screen sizes
+          p: { xs: 1, sm: 2 },
         }}
         display="flex"
-        gap={2} // Adjust gap for better spacing
+        gap={2}
       >
         <Button
           sx={{

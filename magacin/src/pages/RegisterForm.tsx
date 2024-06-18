@@ -11,6 +11,8 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,7 +36,7 @@ const RegisterForm = () => {
       return;
     }
 
-    authContext.register(username, email, password);
+    authContext.register(name, surname, username, email, password);
     alert("Registracija uspješna!");
     navigate("/login");
   };
@@ -67,6 +69,30 @@ const RegisterForm = () => {
         </Box>
         {error && <Typography color="error">{error}</Typography>}
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="name"
+            label="Ime"
+            name="name"
+            autoComplete="name"
+            autoFocus
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="surname"
+            label="Prezime"
+            name="surname"
+            autoComplete="surname"
+            autoFocus
+            value={surname}
+            onChange={(e) => setSurname(e.target.value)}
+          />
           <TextField
             margin="normal"
             required

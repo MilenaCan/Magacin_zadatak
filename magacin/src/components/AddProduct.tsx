@@ -160,6 +160,7 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
             Opis
           </Typography>
           <TextareaAutosize
+            minRows={3}
             required
             style={{ width: "100%", resize: "none" }}
             id="description"

@@ -8,7 +8,13 @@ const ProfilPage = () => {
   const authContext = useContext(UserContext);
   const navigate = useNavigate();
 
-  if (!authContext || !authContext.username || !authContext.email) {
+  if (
+    !authContext ||
+    !authContext.username ||
+    !authContext.email ||
+    !authContext.name ||
+    !authContext.surname
+  ) {
     return null;
   }
 
@@ -31,11 +37,16 @@ const ProfilPage = () => {
         Profil korisnika
       </Typography>
       <Typography variant="body1" pt={4}>
-        Dobro došli, {authContext.username}. Ovo je vaš korisnički nalog.
+        Dobro došli, {authContext.name} {authContext.surname}. Ovo je vaš
+        korisnički nalog.
       </Typography>
       <Typography variant="body1" pb={1} pt={1}>
-        Email: {authContext.email}
+        Korisničko ime: {authContext.username}
       </Typography>
+      <Typography variant="body1" pb={1} pt={1}>
+        Email adresa: {authContext.email}
+      </Typography>
+
       <Button
         onClick={handleBack}
         variant="outlined"
