@@ -16,6 +16,7 @@ const RegisterForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const authContext = useContext(UserContext);
   const navigate = useNavigate();
@@ -24,8 +25,29 @@ const RegisterForm = () => {
     return null;
   }
 
+  const validateEmail = (email: string): boolean => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+
+  const validatePassword = (password: string): boolean => {
+    return password.length >= 8;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validateEmail(email)) {
+      setError("Neispravna email adresa!");
+      return;
+    }
+    if (!validatePassword(password)) {
+      setError("Lozinka mora imati najmanje 8 karaktera!");
+      return;
+    }
+    if (password !== confirmPassword) {
+      setError("Lozinke se ne poklapaju!");
+      return;
+    }
     const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
     const userExists = existingUsers.some(
       (user: any) => user.username === username
@@ -127,6 +149,18 @@ const RegisterForm = () => {
             autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="confirmPassword"
+            label="Potvrda lozinke"
+            type="password"
+            id="confirmPassword"
+            autoComplete="confirm-password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
           <Button
             type="submit"

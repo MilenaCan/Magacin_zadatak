@@ -49,10 +49,15 @@ export const StoragePage = () => {
     setOpen(false);
   };
   const handleDelete = (index: number) => {
-    const newProducts = [...products];
-    newProducts.splice(index, 1);
-    setProducts(newProducts);
-    localStorage.setItem("products", JSON.stringify(newProducts));
+    const confirmed = window.confirm(
+      "Da li ste sigurni da želite da obrišete ovaj proizvod?"
+    );
+    if (confirmed) {
+      const newProducts = [...products];
+      newProducts.splice(index, 1);
+      setProducts(newProducts);
+      localStorage.setItem("products", JSON.stringify(newProducts));
+    }
   };
   const handleProductsChange = (updatedProducts: Product[]) => {
     setProducts(updatedProducts);
