@@ -22,7 +22,7 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
   const [productName, setProductName] = useState("");
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
-  const [weight, setWeight] = useState("");
+  const [color, setColor] = useState("");
   const [serialNumber, setSerialNumber] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState<File | null>(null);
@@ -48,7 +48,7 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
     setProductName("");
     setQuantity("");
     setPrice("");
-    setWeight("");
+    setColor("");
     setSerialNumber("");
     setDescription("");
     setImage(null);
@@ -61,7 +61,7 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
       productName,
       quantity,
       price,
-      weight,
+      color,
       serialNumber,
       description,
       imageUrl,
@@ -125,7 +125,7 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
             margin="dense"
             id="price"
             name="price"
-            label="Cijena"
+            label="Cijena (KM)"
             type="number"
             fullWidth
             variant="standard"
@@ -135,14 +135,14 @@ const AddProduct: React.FC<AddProductDialogProps> = ({ open, onClose }) => {
           <TextField
             required
             margin="dense"
-            id="weight"
-            name="weight"
-            label="Tezina"
-            type="number"
+            id="color"
+            name="color"
+            label="Boja"
+            type="text"
             fullWidth
             variant="standard"
-            value={weight}
-            onChange={(e) => setWeight(e.target.value)}
+            value={color}
+            onChange={(e) => setColor(e.target.value)}
           />
           <TextField
             required

@@ -18,7 +18,7 @@ interface Product {
   productName: string;
   quantity: string;
   price: string;
-  weight: string;
+  color: string;
   serialNumber: string;
   description: string;
   imageUrl?: string;
@@ -41,7 +41,7 @@ const ChangeProduct: React.FC<ChangeProductDialogProps> = ({
   );
   const [newQuantity, setNewQuantity] = useState(product?.quantity || "");
   const [newPrice, setNewPrice] = useState(product?.price || "");
-  const [newWeight, setNewWeight] = useState(product?.weight || "");
+  const [newColor, setNewColor] = useState(product?.color || "");
   const [newSerialNumber, setNewSerialNumber] = useState(
     product?.serialNumber || ""
   );
@@ -54,7 +54,7 @@ const ChangeProduct: React.FC<ChangeProductDialogProps> = ({
       setNewProductName(product.productName);
       setNewQuantity(product.quantity);
       setNewPrice(product.price);
-      setNewWeight(product.weight);
+      setNewColor(product.color);
       setNewSerialNumber(product.serialNumber);
       setNewDescription(product.description);
     }
@@ -69,7 +69,7 @@ const ChangeProduct: React.FC<ChangeProductDialogProps> = ({
         productName: newProductName,
         quantity: newQuantity,
         price: newPrice,
-        weight: newWeight,
+        color: newColor,
         serialNumber: newSerialNumber,
         description: newDescription,
       };
@@ -141,7 +141,7 @@ const ChangeProduct: React.FC<ChangeProductDialogProps> = ({
             margin="dense"
             id="price"
             name="price"
-            label="Cijena"
+            label="Cijena (KM)"
             type="number"
             fullWidth
             variant="standard"
@@ -152,14 +152,14 @@ const ChangeProduct: React.FC<ChangeProductDialogProps> = ({
             autoFocus
             required
             margin="dense"
-            id="weight"
-            name="weight"
-            label="Tezina"
-            type="number"
+            id="color"
+            name="color"
+            label="Boja"
+            type="text"
             fullWidth
             variant="standard"
-            value={newWeight}
-            onChange={(e) => setNewWeight(e.target.value)}
+            value={newColor}
+            onChange={(e) => setNewColor(e.target.value)}
           />
           <TextField
             autoFocus

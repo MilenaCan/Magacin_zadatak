@@ -18,7 +18,7 @@ interface Product {
   productName: string;
   quantity: string;
   price: string;
-  weight: string;
+  color: string;
   serialNumber: string;
   description: string;
   imageUrl?: string;
@@ -70,7 +70,7 @@ const StoragePageTable: React.FC<StoragePageTableProps> = ({
             <TableCell align="left">{product.productName}</TableCell>
             <TableCell align="left">{product.quantity}</TableCell>
             <TableCell align="left">{product.price}</TableCell>
-            <TableCell align="left">{product.weight}</TableCell>
+            <TableCell align="left">{product.color}</TableCell>
             <TableCell align="left">{product.serialNumber}</TableCell>
             <TableCell align="left">
               <Box sx={{ display: "flex", gap: 1 }}>

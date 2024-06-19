@@ -23,7 +23,7 @@ interface Product {
   productName: string;
   quantity: string;
   price: string;
-  weight: string;
+  color: string;
   serialNumber: string;
   description: string;
   imageUrl?: string;
@@ -100,12 +100,12 @@ export const StoragePage = () => {
                     </TableCell>
                     <TableCell align="left">
                       <Typography fontWeight={"fontWeightBold"}>
-                        Cijena
+                        Cijena (KM)
                       </Typography>
                     </TableCell>
                     <TableCell align="left">
                       <Typography fontWeight={"fontWeightBold"}>
-                        Težina
+                        Boja
                       </Typography>
                     </TableCell>
                     <TableCell align="left">
